@@ -13,7 +13,7 @@ JavaScript OOP Course Repository
 *	Open CMD/Terminal and navigate to the checked out repository with the homework
 *	Run `npm install` in CMD/Terminal
 	*	A folder `node_modules` should appear
-*	Your are ready to run the tests
+*	You are ready to run the tests
 
 ## Running the tests
 
@@ -23,4 +23,14 @@ JavaScript OOP Course Repository
 	*	Each .js file must contain `module.exports=[name of the object/function]`
 * 	Run `npm test`
 	*	Test results should appear on the CMD/Terminal
+	
+## Upload in [BGCoder.com](http://bgcoder.com/)
+
+*	Go to the specific homework
+*	Select the task you will be sending
+*	Wrap your result in:
+
+		function solve() {
+			return [your solution object/function];
+		}
 	
