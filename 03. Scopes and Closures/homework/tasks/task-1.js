@@ -22,18 +22,67 @@
 */
 function solve() {
 	var library = (function () {
-		var books = [];
-		var categories = [];
-		function listBooks() {
-			return books;
+		var books = [],
+			categories = [];
+		
+		function listBooks(options) {
+			if(!options){
+				return books;
+			} else{
+				//TODO: implement sorting
+			}
+				
 		}
-
+		
 		function addBook(book) {
+			bookIsValid(book)
 			book.ID = books.length + 1;
+			addCategory(book.category);
 			books.push(book);
-			return book;
+	
+			return book;	
 		}
-
+		
+		function bookIsValid(book){
+			var index,
+				len,
+				isbnTest = /\d{10,13}/,
+				bookCategory = book.category,
+				bookTitle = book.title,
+				bookAuthor = book.author,
+				bookISBN = book.isbn;
+				
+			if(bookTitle.length < 2 || bookTitle.length > 100){
+				throw "Error: book title must be between 2 and 100 characters long";
+			} else if( bookCategory.length < 2 || bookCategory.length > 100){
+				throw "Error: book category must be between 2 and 100 characters long";
+			} else if( !bookAuthor.length ){
+				throw "Error: book author must not be empty"
+			} else{
+				if (!isbnTest.test(bookISBN.toString())){
+					throw "Error: book isbn must be between 10 and 13 digits"
+				}
+				
+				for (index = 0, len=books.length; index < len; index++) {
+					if(book.isbn === books[index].isbn){
+						throw "Error: ISBN number must be unique!"
+					} else if(book.name === books[index].name){
+						throw "Error: book name must be unique!"
+					}
+				}
+			}
+			
+			return true;
+		}
+		
+		//Categories
+		function addCategory(category){
+			if(categories.indexOf(category) === -1){
+				categories.push(category);
+			}
+			return category;
+		}
+		
 		function listCategories() {
 			return categories;
 		}
@@ -48,6 +97,12 @@ function solve() {
 			}
 		};
 	} ());
+	
+	
+				
 	return library;
 }
-module.exports = solve;
+
+solve();
+
+// module.exports = solve;
