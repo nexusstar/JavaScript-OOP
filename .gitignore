@@ -194,5 +194,6 @@ FakesAssemblies/
 
 # Visual Studio 6 workspace options file
 *.opt
-#Ignore JetBrains files
-.idea/
+
+# Webstorm project folder
+.idea
