@@ -103,6 +103,5 @@ function solve() {
 	return library;
 }
 
-solve();
 
-// module.exports = solve;
+module.exports = solve;
