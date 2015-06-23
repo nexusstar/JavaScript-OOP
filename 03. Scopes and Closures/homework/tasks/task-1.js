@@ -29,9 +29,28 @@ function solve() {
 			if(!options){
 				return books;
 			} else{
-				//TODO: implement sorting
+				if(options.category){
+					return listBooksBy("category", options.category);
+				}else if(options.author){
+					return listBooksBy("author", options.author);
+				} 
 			}
 				
+		}
+		
+		function listBooksBy(key, value){
+			var index,
+				len,
+				book,
+				result = [];
+				
+			for (index = 0, len = books.length; index < len; index++) {
+				book = books[index];
+				if(book[key] === value){
+					result.push(books[index]);
+				}
+			}
+			return result;
 		}
 		
 		function addBook(book) {
@@ -66,7 +85,7 @@ function solve() {
 				for (index = 0, len=books.length; index < len; index++) {
 					if(book.isbn === books[index].isbn){
 						throw "Error: ISBN number must be unique!"
-					} else if(book.name === books[index].name){
+					} else if(book.title === books[index].title){
 						throw "Error: book name must be unique!"
 					}
 				}
@@ -98,10 +117,7 @@ function solve() {
 		};
 	} ());
 	
-	
-				
 	return library;
 }
-
 
 module.exports = solve;
