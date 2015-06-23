@@ -1,7 +1,5 @@
-# Prototypal Inheritance
-==================================
-
-### Task 1.
+/* Task Description */
+/*
 * Create an object domElement, that has the following properties and methods:
   * use prototypal inheritance, without function constructors
   * method init() that gets the domElement type
@@ -26,36 +24,58 @@
   * method addAttribute(name, value)
     * throw Error if type is not valid
   * // method removeAttribute(attribute)
+*/
 
-_Example:_
-  
-  var meta = Object.create(domElement)<br/>
-  	.init('meta')<br/>
-  	.addAttribute('charset', 'utf-8');
-  
-  var head = Object.create(domElement)<br/>
-  	.init('head')<br/>
-  	.appendChild(meta)
-  
-  var div = Object.create(domElement)<br/>
-  	.init('div')<br/>
-  	.addAttribute('style', 'font-size: 42px');
-  
-  div.content = 'Hello, world!';
-  
-  var body = Object.create(domElement)<br/>
-  	.init('body')<br/>
-  	.appendChild(div)<br/>
-  	.addAttribute('id', 'cuki')<br/>
-  	.addAttribute('bgcolor', '#012345');
-  
-  var root = Object.create(domElement)<br/>
-  	.init('html')<br/>
-  	.appendChild(head)<br/>
-  	.appendChild(body);
-  
-  console.log(root.innerHTML);
-  
-  _Outputs:_
-  
-  \<html\>\<head\>\<meta charset="utf-8"\>\</meta\>\</head\>\<body bgcolor="#012345" id="cuki"\>\<div style="font-size: 42px"\>Hello, world!\</div\>\</body\>\</html\>
+
+/* Example
+
+var meta = Object.create(domElement)
+	.init('meta')
+	.addAttribute('charset', 'utf-8');
+
+var head = Object.create(domElement)
+	.init('head')
+	.appendChild(meta)
+
+var div = Object.create(domElement)
+	.init('div')
+	.addAttribute('style', 'font-size: 42px');
+
+div.content = 'Hello, world!';
+
+var body = Object.create(domElement)
+	.init('body')
+	.appendChild(div)
+	.addAttribute('id', 'cuki')
+	.addAttribute('bgcolor', '#012345');
+
+var root = Object.create(domElement)
+	.init('html')
+	.appendChild(head)
+	.appendChild(body);
+
+console.log(root.innerHTML);
+Outputs:
+<html><head><meta charset="utf-8"></meta></head><body bgcolor="#012345" id="cuki"><div style="font-size: 42px">Hello, world!</div></body></html>
+*/
+
+
+function solve() {
+	var domElement = (function () {
+		var domElement = {
+			init: function(type) {
+			},
+			appendChild: function(child) {
+			},
+			addAttribute: function(name, value) {
+			},
+      get innerHTML(){
+        
+      }
+		};
+		return domElement;
+	} ());
+	return domElement;
+}
+
+module.exports = solve;
