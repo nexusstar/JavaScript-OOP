@@ -1,5 +1,5 @@
 /* globals describe, it */
-var Person = require('../tasks/task-1')();
+var Person = require('../tasks/task-1_1')();
 var expect = require('chai').expect;
 
 describe('Tests for Classical Inheritance in JavaScript', function () {
