@@ -23,65 +23,69 @@ function solve() {
 		}
 		
 		function isName(name){
-			return /^[a-zA-Z]{3,20}$/.test(name);
+			var strTest = /^[a-z]{3,20}$/gi;			
+			return strTest.test(name);
 		}
 		
 		function Person(firstname, lastname, age) {
-				this.firstname = firstname;
-				this.lastname = lastname;
-				this.age = age;	
+			this.firstname = firstname;
+			this.lastname = lastname;
+			this.age = age;			
 		}
-		Person.protoype.firstname = {
-			get firstname(){
-				return this.firstname;
+		
+		Object.defineProperty(Person.prototype, "firstname", {
+			get: function(){
+					return this._firstname;
 			},
-			set firstname(name){
-				if(!name || !isString(name) || isName(name)){
+			set: function(name){
+				if(!name || !isString(name) || !isName(name)){
 					throw "Error: ilegal first name provided";
 				}
-				this.firstname = name;
+				this._firstname = name;
 			}
-		}
-		
-		Person.prototype.lastname = {
-			
-			get lastname(){
+		});
+				
+		Object.defineProperty(Person.prototype, "lastname",{
+			get: function(){
 				return this._lastname;
 			},
-			set lastnane(name){
-				if(!name || !isString(name) || isName(name)){
+			set: function(name){
+				if(!name || !isString(name) || !isName(name)){
 					throw "Error: ilegal last name provided";
-				}
-				this.lastname = name; 
+						}
+				this._lastname = name; 
 			}
-		}
-		
-		Person.prototype.age = {
-			get age(){
+		});
+				
+		Object.defineProperty(Person.prototype, "age",{
+			get: function(){
 				return this._age;
 			},
-			set age(num){
-				if(!age || isNaN(age) || age < 0 || age > 150){
+			set: function(num){
+				if(!num || isNaN(num) || num < 0 || num > 150){
 					throw "Error ilegal age provided"
 				}
+				this._age = num*1; //convert to 'number'
 			}
+		});
+				
+		Object.defineProperty(Person.prototype, "fullname",{
+			get: function(){
+				return this._firstname + ' ' + this._lastname; 
+			},
+			set: function(name){
+				var names = name.split(' ');
+				this.firstname = names[0];
+				this.lastname = names[1];
+			}
+		});
+
+		Person.prototype.introduce = function(){
+					return 'Hello! My name is '+ this.fullname +  ' and I am '+ this.age + '-years-old';
 		}
-		
-		Person.prototype.fullname ={
-				get: this._firstname + ' ' + this._lastname,
-				set: function(name){
-					var names = name.split(' ');
-					this._firstname = names[0];
-					this._lastname = names[1];			
-			}
-		};
 			
 		return Person;
 	} ());
-	var p = new Person("firstname", "lastname", 120);
-	console.log(p);
-	console.log(p.fullname());
 	return Person;
 }
-solve();
-// module.exports = solve;
+module.exports = solve;
