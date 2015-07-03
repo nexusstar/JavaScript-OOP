@@ -1,11 +1,11 @@
 /* Task Description */
-/* 
+/*
 	Create a function constructor for Person. Each Person must have:
 	*	properties `firstname`, `lastname` and `age`
 		*	firstname and lastname must always be strings between 3 and 20 characters, containing only Latin letters
 		*	age must always be a number in the range 0 150
 			*	the setter of age can receive a convertible-to-number value
-		*	if any of the above is not met, throw Error 		
+		*	if any of the above is not met, throw Error
 	*	property `fullname`
 		*	the getter returns a string in the format 'FIRST_NAME LAST_NAME'
 		*	the setter receives a string is the format 'FIRST_NAME LAST_NAME'
@@ -17,25 +17,25 @@
 */
 function solve() {
 	var Person = (function () {
-		
+
 		function isString(obj){
 			return (typeof obj === 'string');
 		}
-		
+
 		function isName(name){
-			var strTest = /^[a-z]{3,20}$/gi;			
+			var strTest = /^[a-z]{3,20}$/gi;
 			return strTest.test(name);
 		}
-		
+
 		function Person(firstname, lastname, age) {
 			var _firstname = firstname,
 				_lastname = lastname,
 				_age = age;
 			this.firstname = firstname;
 			this.lastname = lastname;
-			this.age = age;		
+			this.age = age;
 		}
-			
+
 		Person.prototype = {
 				set firstname(name){
 					if(!name || !isString(name) || !isName(name)){
@@ -73,14 +73,14 @@ function solve() {
 					return this._firstname + ' ' + this.lastname;
 				}
 			}
-		
+
 		Person.prototype.introduce = function(){
 					return 'Hello! My name is '+ this.fullname +  ' and I am '+ this.age + '-years-old';
 		}
-		
+
 		return Person;
 	} ());
-	
+
 	return Person;
 }
 module.exports = solve;
