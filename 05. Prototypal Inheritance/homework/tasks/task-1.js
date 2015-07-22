@@ -77,6 +77,7 @@ function solve() {
 		var domElement = {
 			init: function(type) {
 				this.type = type;
+				return this;
 			},
 			get type() {
 				return this.type;
@@ -86,7 +87,10 @@ function solve() {
 					throw new Error(
 						'Error: domElement type must be characters and numbers only');
 				}
+
 				this.type = value;
+				return this;
+
 			},
 			appendChild: function(child) {
 
@@ -100,9 +104,13 @@ function solve() {
 			}
 
 		};
+
 		return domElement;
 	}());
+
 	return domElement;
 }
 
+solve();
+console.log(solve.domElement);
 // module.exports = solve;
