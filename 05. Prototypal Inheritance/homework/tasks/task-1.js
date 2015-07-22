@@ -30,32 +30,32 @@
 
 /* Example
 
-var meta = Object.create(domElement)
-	.init('meta')
-	.addAttribute('charset', 'utf-8');
+   var meta = Object.create(domElement)
+   .init('meta')
+   .addAttribute('charset', 'utf-8');
 
-var head = Object.create(domElement)
-	.init('head')
-	.appendChild(meta)
+   var head = Object.create(domElement)
+   .init('head')
+   .appendChild(meta)
 
-var div = Object.create(domElement)
-	.init('div')
-	.addAttribute('style', 'font-size: 42px');
+   var div = Object.create(domElement)
+   .init('div')
+   .addAttribute('style', 'font-size: 42px');
 
-div.content = 'Hello, world!';
+   div.content = 'Hello, world!';
 
-var body = Object.create(domElement)
-	.init('body')
-	.appendChild(div)
-	.addAttribute('id', 'cuki')
-	.addAttribute('bgcolor', '#012345');
+   var body = Object.create(domElement)
+   .init('body')
+   .appendChild(div)
+   .addAttribute('id', 'cuki')
+   .addAttribute('bgcolor', '#012345');
 
-var root = Object.create(domElement)
-	.init('html')
-	.appendChild(head)
-	.appendChild(body);
+   var root = Object.create(domElement)
+   .init('html')
+   .appendChild(head)
+   .appendChild(body);
 
-console.log(root.innerHTML);
+   console.log(root.innerHTML);
 Outputs:
 <html><head><meta charset="utf-8"></meta></head><body bgcolor="#012345" id="cuki"><div style="font-size: 42px">Hello, world!</div></body></html>
 */
@@ -77,20 +77,34 @@ function solve() {
 		var domElement = {
 			init: function(type) {
 				this.type = type;
+<<<<<<< Updated upstream
 				return this;
+||||||| merged common ancestors
+=======
+				this.attributes = [];
+
+				return this;
+
+>>>>>>> Stashed changes
 			},
 			get type() {
-				return this.type;
+				return this._type;
 			},
 			set type(value) {
 				if (!validType(value)) {
 					throw new Error(
 						'Error: domElement type must be characters and numbers only');
 				}
+<<<<<<< Updated upstream
 
 				this.type = value;
 				return this;
 
+||||||| merged common ancestors
+				this.type = value;
+=======
+				this._type = value;
+>>>>>>> Stashed changes
 			},
 			appendChild: function(child) {
 
@@ -111,6 +125,12 @@ function solve() {
 	return domElement;
 }
 
+<<<<<<< Updated upstream
 solve();
 console.log(solve.domElement);
 // module.exports = solve;
+||||||| merged common ancestors
+// module.exports = solve;
+=======
+module.exports = solve;
+>>>>>>> Stashed changes
