@@ -29,33 +29,26 @@
 
 
 /* Example
-
-   var meta = Object.create(domElement)
-   .init('meta')
-   .addAttribute('charset', 'utf-8');
-
-   var head = Object.create(domElement)
-   .init('head')
-   .appendChild(meta)
-
-   var div = Object.create(domElement)
-   .init('div')
-   .addAttribute('style', 'font-size: 42px');
-
-   div.content = 'Hello, world!';
-
-   var body = Object.create(domElement)
-   .init('body')
-   .appendChild(div)
-   .addAttribute('id', 'cuki')
-   .addAttribute('bgcolor', '#012345');
-
-   var root = Object.create(domElement)
-   .init('html')
-   .appendChild(head)
-   .appendChild(body);
-
-   console.log(root.innerHTML);
+var meta = Object.create(domElement)
+	.init('meta')
+	.addAttribute('charset', 'utf-8');
+var head = Object.create(domElement)
+	.init('head')
+	.appendChild(meta)
+var div = Object.create(domElement)
+	.init('div')
+	.addAttribute('style', 'font-size: 42px');
+div.content = 'Hello, world!';
+var body = Object.create(domElement)
+	.init('body')
+	.appendChild(div)
+	.addAttribute('id', 'cuki')
+	.addAttribute('bgcolor', '#012345');
+var root = Object.create(domElement)
+	.init('html')
+	.appendChild(head)
+	.appendChild(body);
+console.log(root.innerHTML);
 Outputs:
 <html><head><meta charset="utf-8"></meta></head><body bgcolor="#012345" id="cuki"><div style="font-size: 42px">Hello, world!</div></body></html>
 */
@@ -63,74 +56,78 @@ Outputs:
 
 function solve() {
 	var domElement = (function() {
-
-		function validType(type) {
-			var strTest = /^[a-z][a-z0-9]*$/i;
-			return strTest.test(type);
-		}
-
-		function validAttribute(attr) {
-			var strTest = /^[a-z][a-z0-9-]*$/i;
-			return strTest.test(attr);
-		}
-
 		var domElement = {
 			init: function(type) {
 				this.type = type;
-<<<<<<< Updated upstream
-				return this;
-||||||| merged common ancestors
-=======
-				this.attributes = [];
+				this.attributes = {};
 
 				return this;
-
->>>>>>> Stashed changes
 			},
-			get type() {
-				return this._type;
-			},
-			set type(value) {
-				if (!validType(value)) {
-					throw new Error(
-						'Error: domElement type must be characters and numbers only');
-				}
-<<<<<<< Updated upstream
-
-				this.type = value;
-				return this;
-
-||||||| merged common ancestors
-				this.type = value;
-=======
-				this._type = value;
->>>>>>> Stashed changes
-			},
-			appendChild: function(child) {
-
-			},
+			appendChild: function(child) {},
 			addAttribute: function(name, value) {
+				if (!name.length || !isValidAttribute(name)) {
+					throw new Error(
+						'Error attribute name must be non-empty string for that contains only Latin letters and digits or dashes'
+					);
+				}
 
+				this.attributes[name] = value;
+
+				return this;
 			},
-			removeAttribute: function(attribute) {},
+			removeAttribute: function(attribute) {
+				var temp = this.attributes;
+				console.log(temp);
+				if (temp.indexOf(attribute) === -1) {
+					throw new Error(
+						'Error: ' + attribute + ' non-existent attribute'
+					);
+				}
+
+				return 'whatever';
+			},
 			get innerHTML() {
 
 			}
 
 		};
 
+		Object.defineProperties(domElement, {
+			"type": {
+				get: function() {
+					return this._type;
+				},
+				set: function(value) {
+					if (!isValidType(value)) {
+						throw new Error('Error type!');
+					}
+					this._type = value;
+				}
+			}
+		});
+
+		/*Helper functions*/
+		function isValidType(value) {
+			var strTest = /^[a-z][a-z0-9-]*$/i;
+			return strTest.test(value);
+		}
+
+		function isValidAttribute(value) {
+			var strTest = /^[A-Z\d\-]+$/i;
+			return strTest.test(value);
+		}
+
 		return domElement;
 	}());
 
+	var root = Object.create(domElement)
+		.init('td')
+		.addAttribute('rowsomething', 'has a value')
+		.removeAttribute('rowsomething');
+
 	return domElement;
 }
-
-<<<<<<< Updated upstream
 solve();
-console.log(solve.domElement);
+
+
 // module.exports = solve;
-||||||| merged common ancestors
-// module.exports = solve;
-=======
-module.exports = solve;
->>>>>>> Stashed changes
